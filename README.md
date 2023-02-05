@@ -1,10 +1,7 @@
-# rex_repo_template
-REDAXO AddOn english readme
+# media_negotiator
 
-please use in your classes a namespace as
+Addon für Redaxo welches dem Media Manager Addon einen Effekt für Content Negotiation hinzufügt. Siehe https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation
 
-```
-namespace FriendsOfRedaxo\[AddOnNameWithoutSpacesAndAsCamelCase]
-```
-
-in order to use non deprecated features please don't use PlugIns anymore
+Anleitung:  
+Dem Media Profil den Effekt "Negotiate image format" hinzufügen.  
+Danach wird automatisch eines der folgenden Formate ausgeliefert: avif, webp, jpg (in dieser Reihenfolge).

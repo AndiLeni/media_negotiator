@@ -1,8 +1,9 @@
-package: addon_key
-version: '0.0.0'
-author: 'Friends Of REDAXO'
-supportpage: https://github.com/FriendsOfREDAXO/addon_key
+package: media_negotiator
+version: 1.0.0
+name: Media Negotiator
+author: Andreas Lenhardt
+
 requires:
-    redaxo: '^5.13.0'
+    redaxo: ^5.13.0
     php:
-        version: '>=7.3, <9'
+        version: "^8.0"
