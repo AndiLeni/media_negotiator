@@ -9,15 +9,12 @@ function negotiateFormat($ep)
     // check if the requested image has the 'negotiator' effect 
     $set_effects = $subject->effectsFromType($subject->getMediaType());
     $set_effects = array_column($set_effects, 'effect');
-    $type = $subject->getMediaType();
 
     // if not, skip
     if (!in_array('negotiator', $set_effects)) {
         return $subject;
-    }
-
-    // if yes, set cache path
-    if (in_array($type, ['avif'])) {
+    } else {
+        // if yes, set cache path
         $possible_types = rex_server('HTTP_ACCEPT', 'string', '');
         $types = explode(',', $possible_types);
 
@@ -30,6 +27,7 @@ function negotiateFormat($ep)
             $subject->setCachePath($subject->getCachePath() . 'jpg-');
         }
     }
+
 
     return $subject;
 }
