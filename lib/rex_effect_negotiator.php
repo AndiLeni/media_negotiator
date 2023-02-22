@@ -20,9 +20,9 @@ class rex_effect_negotiator extends rex_effect_abstract
         $re->media = $this->media;
 
         // set convert_to extension 
-        if (in_array('image/avif', $types)) {
+        if (function_exists('imageavif') && in_array('image/avif', $types)) {
             $re->params['convert_to'] = 'avif';
-        } elseif (in_array('image/webp', $types)) {
+        } elseif (function_exists('imagewebp') && in_array('image/webp', $types)) {
             $re->params['convert_to'] = 'webp';
         } else {
             $re->params['convert_to'] = 'jpg';
