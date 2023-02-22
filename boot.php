@@ -19,9 +19,9 @@ function negotiateFormat($ep)
         $types = explode(',', $possible_types);
 
 
-        if (in_array('image/avif', $types)) {
+        if (function_exists('imageavif') && in_array('image/avif', $types)) {
             $subject->setCachePath($subject->getCachePath() . 'avif-');
-        } elseif (in_array('image/webp', $types)) {
+        } elseif (function_exists('imagewebp') && in_array('image/webp', $types)) {
             $subject->setCachePath($subject->getCachePath() . 'webp-');
         } else {
             $subject->setCachePath($subject->getCachePath() . 'jpg-');
