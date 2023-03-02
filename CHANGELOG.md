@@ -1,7 +1,7 @@
 # Changelog
 
 
-
+## [2.0.0] - 02.03.2023
 
 ### Changed
 - deliver original file when image can not be converted to avif or webp [#1](https://github.com/AndiLeni/media_negotiator/issues/1)
