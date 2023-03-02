@@ -24,10 +24,9 @@ function negotiateFormat($ep)
         } elseif (function_exists('imagewebp') && in_array('image/webp', $types)) {
             $subject->setCachePath($subject->getCachePath() . 'webp-');
         } else {
-            $subject->setCachePath($subject->getCachePath() . 'jpg-');
+            $subject->setCachePath($subject->getCachePath() . 'default-');
         }
     }
-
 
     return $subject;
 }

@@ -22,13 +22,12 @@ class rex_effect_negotiator extends rex_effect_abstract
         // set convert_to extension 
         if (function_exists('imageavif') && in_array('image/avif', $types)) {
             $re->params['convert_to'] = 'avif';
+            $re->execute();
         } elseif (function_exists('imagewebp') && in_array('image/webp', $types)) {
             $re->params['convert_to'] = 'webp';
+            $re->execute();
         } else {
-            $re->params['convert_to'] = 'jpg';
+            // do not change format and deliver original file
         }
-
-        // change format
-        $re->execute();
     }
 }

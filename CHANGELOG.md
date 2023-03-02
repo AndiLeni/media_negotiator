@@ -1,10 +1,17 @@
-# Changelog 
+# Changelog
+
+
+
+
+### Changed
+- deliver original file when image can not be converted to avif or webp [#1](https://github.com/AndiLeni/media_negotiator/issues/1)
+
 
 
 ## [1.1.1] - 22.02.2023
 
 ### Changed
-- fix issue with php 8.1 where gd is not compiled with avif support / [#3](https://github.com/AndiLeni/media_negotiator/issues/3) 
+- fix issue with php 8.1 where gd is not compiled with avif support / [#3](https://github.com/AndiLeni/media_negotiator/issues/3)
 
 
 
