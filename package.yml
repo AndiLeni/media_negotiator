@@ -2,6 +2,7 @@ package: media_negotiator
 version: 2.0.0
 name: Media Negotiator
 author: Andreas Lenhardt
+supportpage: https://github.com/AndiLeni/media_negotiator
 
 requires:
     redaxo: ^5.13.0
