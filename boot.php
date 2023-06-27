@@ -31,9 +31,7 @@ function negotiateFormat($ep)
     return $subject;
 }
 
-
-rex_extension::register('MEDIA_MANAGER_BEFORE_SEND', "negotiateFormat");
-
 if (rex_addon::get('media_manager')->isAvailable()) {
     rex_media_manager::addEffect(rex_effect_negotiator::class);
 }
+rex_extension::register('MEDIA_MANAGER_BEFORE_SEND', "negotiateFormat",rex_extension::LATE);
