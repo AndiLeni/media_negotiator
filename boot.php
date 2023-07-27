@@ -1,5 +1,7 @@
 <?php
 
+use media_negotiator\Helper;
+
 function negotiateFormat($ep)
 {
 
@@ -18,10 +20,12 @@ function negotiateFormat($ep)
         $possible_types = rex_server('HTTP_ACCEPT', 'string', '');
         $types = explode(',', $possible_types);
 
+        // check which output type is technically possible
+        $possibleFormat = Helper::getOutputFormat($types);
 
-        if (function_exists('imageavif') && in_array('image/avif', $types)) {
+        if ($possibleFormat === "avif") {
             $subject->setCachePath($subject->getCachePath() . 'avif-');
-        } elseif (function_exists('imagewebp') && in_array('image/webp', $types)) {
+        } elseif ($possibleFormat === "webp") {
             $subject->setCachePath($subject->getCachePath() . 'webp-');
         } else {
             $subject->setCachePath($subject->getCachePath() . 'default-');
