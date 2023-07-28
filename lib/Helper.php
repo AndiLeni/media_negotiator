@@ -14,7 +14,7 @@ class Helper
     {
         $possibleFormat = "";
 
-        // first check webp and set it, can overridden by avif in next step if avif is available
+        // first check webp and set it, can be overridden by avif in next step if avif is available
         if (in_array('image/webp', $requestedTypes)) {
             // check if webp output is possible
 
