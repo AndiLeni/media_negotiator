@@ -6,7 +6,8 @@ supportpage: https://github.com/AndiLeni/media_negotiator
 
 page:
     title: 'Media Negotiator'
-
+    perm: media_negotiator[]
+    
 default_config:
     force_imagick: false
 
