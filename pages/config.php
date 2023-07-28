@@ -1,5 +1,3 @@
-<h1>media_negotiator Einstellungen</h1>
-
 <?php
 
 use media_negotiator\Helper;
