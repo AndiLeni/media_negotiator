@@ -6,10 +6,15 @@ supportpage: https://github.com/AndiLeni/media_negotiator
 
 page:
     title: 'Media Negotiator'
+    icon: 'maintenance rex-icon fa-pie-chart'
     perm: media_negotiator[]
+subpages:
+        config:
+            { title: 'Config', icon: rex-icon fa-laptop }    
     
 default_config:
     force_imagick: false
+    frontend: 
 
 requires:
     redaxo: ^5.13.0
