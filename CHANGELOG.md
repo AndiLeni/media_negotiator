@@ -1,5 +1,12 @@
 # Changelog
 
+
+## [2.2.1] - 28.07.2023
+
+- Settings page shows which functions are available and which output formats are possible
+
+
+
 ## [2.2.0] - 28.07.2023
 
 - Added setting to force usage of Imagick. F.e. when GD is not supporting avif as expected.
