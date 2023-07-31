@@ -1,6 +1,12 @@
 # Changelog
 
 
+## [2.2.2] - 31.07.2023
+
+- check added if Imagick supports webp or avif as output formats
+
+
+
 ## [2.2.1] - 28.07.2023
 
 - Settings page shows which functions are available and which output formats are possible
