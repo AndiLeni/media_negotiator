@@ -14,11 +14,18 @@ class Helper
     {
         $possibleFormat = "";
 
+        $imagickFormats = [];
+
+        if (class_exists(Imagick::class)) {
+            $imagick = new Imagick();
+            $imagickFormats = $imagick->queryFormats();
+        }
+
         // first check webp and set it, can be overridden by avif in next step if avif is available
         if (in_array('image/webp', $requestedTypes)) {
             // check if webp output is possible
 
-            if ((function_exists('imagewebp') || class_exists(Imagick::class))) {
+            if ((function_exists('imagewebp') || in_array("WEBP", $imagickFormats))) {
                 $possibleFormat = "webp";
             }
         }
@@ -28,7 +35,7 @@ class Helper
 
             // check if redaxo version >= 5.15.0 (media_manager supports avif from this version upwards, must be true for MM and Imagick)
             // and if either imageavif() is available or Imagick installed
-            if (rex_version::compare(rex::getVersion(), '5.15.0', '>=') && (function_exists('imageavif') || class_exists(Imagick::class))) {
+            if (rex_version::compare(rex::getVersion(), '5.15.0', '>=') && (function_exists('imageavif') || in_array("AVIF", $imagickFormats))) {
                 $possibleFormat = "avif";
             }
         }
