@@ -1,6 +1,15 @@
 # Changelog
 
 
+## [3.0.0] - 01.08.2023
+
+- Added check to confirm whether file is already cached or not
+- MIGRATION: alle Media-Manager Effekte die den Negotiator nutzen müssen einmal bearbeitet werden. 
+  Dabei muss das neue Parameterfeld "Name dieses Effekts" auf den Namen des Effekts gesetzt werden, welcher den Negotiator nutzt.
+  Das Feld sollte den korrekten Wert bereits als default tragen.
+
+
+
 ## [2.2.2] - 31.07.2023
 
 - check added if Imagick supports webp or avif as output formats
