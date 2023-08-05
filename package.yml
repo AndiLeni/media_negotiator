@@ -8,6 +8,8 @@ page:
     title: 'Media Negotiator'
     perm: media_negotiator[]
     subpages:
+            setup:
+                { title: 'Setup', icon: rex-icon }    
             config:
                 { title: 'Einstellungen', icon: rex-icon fa-cog }    
     

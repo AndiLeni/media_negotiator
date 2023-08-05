@@ -22,11 +22,6 @@ class rex_effect_negotiator extends rex_effect_abstract
 
         if ($possibleFormat === "avif") {
 
-            // check if file is cached, if yes return 
-            if ($this->isCached($possibleFormat)) {
-                return;
-            }
-
             // check if force_imagick enabled or imageavif not available, else use GD
             if (rex_config::get("media_negotiator", "force_imagick", false) || !function_exists('imageavif')) {
                 // use Imagick
@@ -46,10 +41,6 @@ class rex_effect_negotiator extends rex_effect_abstract
             }
         } elseif ($possibleFormat === "webp") {
 
-            if ($this->isCached($possibleFormat)) {
-                return;
-            }
-
             if (rex_config::get("media_negotiator", "force_imagick", false) || !function_exists('imagewebp')) {
                 // use Imagick
                 $img = $this->media->getSource();
@@ -66,39 +57,5 @@ class rex_effect_negotiator extends rex_effect_abstract
         } else {
             // do not change format and deliver original file
         }
-    }
-
-    private function isCached($targetFormat)
-    {
-        $cachePath = rex_path::addonCache('media_manager');
-        $type = $this->params["mediatyp"];
-        $originalFilename = $this->media->getMediaFilename();
-
-        $cacheFile = "{$cachePath}{$targetFormat}-{$type}/{$originalFilename}";
-
-        if (is_file($cacheFile)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    public function getParams()
-    {
-        $effectId = rex_get("type_id", "int", 0);
-        $sql = rex_sql::factory();
-        $res = $sql->setQuery("select name from " . rex::getTable("media_manager_type") . " where id = ?", [$effectId]);
-        $typName = $res->getValue("name");
-
-        return [
-            [
-                'label' => "Name dieses Effekts",
-                'name' => 'mediatyp',
-                'type' => 'string',
-                'notice' => "Hier bitte den Namen des Mediatyps eintragen. (Sollte korrekt vorausgefüllt sein)",
-                'default' => $typName,
-            ],
-        ];
     }
 }

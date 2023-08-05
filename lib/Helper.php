@@ -12,7 +12,7 @@ class Helper
 
     public static function getOutputFormat($requestedTypes): string
     {
-        $possibleFormat = "";
+        $possibleFormat = "default";
 
         $imagickFormats = [];
 
