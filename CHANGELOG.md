@@ -1,6 +1,18 @@
 # Changelog
 
 
+## [4.0.0alpha1] - 05.08.2023
+
+-  remove params
+- now for working correctly the media_manager.php file must be changed which shloud ensure correct function of the caching mechanism
+- MIGRATION: 
+  Die Datei media_manager.php des media manager Addons muss angepasst werden. 
+  Die Anleitung dazu findet sich auf der Setup Seite des Addons.
+  Dies ist notwendig um die Cache-Funktionalität korrekt zu gewährleisten. 
+
+
+
+
 ## [3.0.0] - 01.08.2023
 
 - Added check to confirm whether file is already cached or not
