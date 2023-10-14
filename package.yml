@@ -15,6 +15,7 @@ page:
     
 default_config:
     force_imagick: false
+    disable_avif: false
 
 requires:
     redaxo: ^5.13.0

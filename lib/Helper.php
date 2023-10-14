@@ -5,6 +5,7 @@ namespace media_negotiator;
 use rex;
 use rex_version;
 use Imagick;
+use rex_config;
 
 class Helper
 {
@@ -30,8 +31,9 @@ class Helper
             }
         }
 
-        // check if avif output is possible
-        if (in_array('image/avif', $requestedTypes)) {
+        // check if avif output is possible and not deactivated
+        $disable_avif = rex_config::get("media_negotiator", "disable_avif", false);
+        if (in_array('image/avif', $requestedTypes) && !$disable_avif) {
 
             // check if redaxo version >= 5.15.0 (media_manager supports avif from this version upwards, must be true for MM and Imagick)
             // and if either imageavif() is available or Imagick installed
