@@ -68,4 +68,43 @@ echo "<p>WEBP Ausgabe möglich: {$canGenerateWebp}</p>";
 echo "<p>AVIF Ausgabe möglich: {$canGenerateAvif}</p>";
 
 
+
+// demo images to see if codecs are installed and output is possible
+$demo_img = rex_path::addon('media_negotiator', "data/demo.jpg");
+$image = imagecreatefromjpeg($demo_img);
+
+if (function_exists('imagewebp')) {
+    ob_start();
+    imagewebp($image);
+    $imageData = ob_get_contents();
+    ob_end_clean();
+    imagedestroy($image);
+    $imageData = base64_encode($imageData);
+    echo '<p>imagewebp: <img class="img-thumbnail" src="data:image/webp;base64,' . $imageData . '"></p>';
+}
+
+if (function_exists('imageavif')) {
+    ob_start();
+    imageavif($image);
+    $imageData = ob_get_contents();
+    ob_end_clean();
+    imagedestroy($image);
+    $imageData = base64_encode($imageData);
+    echo '<p>imageavif: <img class="img-thumbnail" src="data:image/avif;base64,' . $imageData . '"></p>';
+}
+
+if (class_exists(Imagick::class)) {
+    $image = new Imagick($demo_img);
+    $image->setImageFormat('webp');
+    $imageData = $image->getImageBlob();
+    $imageDataBase64 = base64_encode($imageData);
+    echo '<p>Imagick webp: <img class="img-thumbnail" src="data:image/webp;base64,' . $imageDataBase64 . '"></p>';
+
+    $image = new Imagick($demo_img);
+    $image->setImageFormat('avif');
+    $imageData = $image->getImageBlob();
+    $imageDataBase64 = base64_encode($imageData);
+    echo '<p>Imagick avif: <img class="img-thumbnail" src="data:image/avif;base64,' . $imageDataBase64 . '"></p>';
+}
+
 ?>
