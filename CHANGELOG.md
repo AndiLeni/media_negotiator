@@ -1,6 +1,11 @@
 # Changelog
 
 
+## [4.0.0] - 14.10.2023
+
+- add option to disable avif generation (some servers d not have avif codecs installed) / #15
+
+
 ## [4.0.0alpha1] - 05.08.2023
 
 -  remove params
