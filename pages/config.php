@@ -45,6 +45,9 @@ if (class_exists(Imagick::class)) {
     } else {
         echo '<p class="text-danger bold"><b>Imagick kann kein AVIF</b></p>';
     }
+
+    $imagickVersion = Imagick::getVersion()["versionString"];
+    echo "<p>Imagick Version: " . $imagickVersion . "</p>";
 } else {
     echo '<p class="text-danger bold"><b>Imagick ist nicht installiert</b></p>';
 }
@@ -100,17 +103,26 @@ if (function_exists('imageavif')) {
 }
 
 if (class_exists(Imagick::class)) {
-    $image = new Imagick($demo_img);
-    $image->setImageFormat('webp');
-    $imageData = $image->getImageBlob();
-    $imageDataBase64 = base64_encode($imageData);
-    echo '<p>Imagick webp: <img class="img-thumbnail" src="data:image/webp;base64,' . $imageDataBase64 . '"></p>';
+    try {
+        $image = new Imagick($demo_img);
+        $image->setImageFormat('webp');
+        $imageData = $image->getImageBlob();
+        $imageDataBase64 = base64_encode($imageData);
+        echo '<p>Imagick webp: <img class="img-thumbnail" src="data:image/webp;base64,' . $imageDataBase64 . '"></p>';
+    } catch (Exception $e) {
+        echo rex_view::error($e->getMessage());
+    }
 
-    $image = new Imagick($demo_img);
-    $image->setImageFormat('avif');
-    $imageData = $image->getImageBlob();
-    $imageDataBase64 = base64_encode($imageData);
-    echo '<p>Imagick avif: <img class="img-thumbnail" src="data:image/avif;base64,' . $imageDataBase64 . '"></p>';
+    try {
+        $image = new Imagick($demo_img);
+        $image->setImageFormat('avif');
+        $imageData = $image->getImageBlob();
+        $imageDataBase64 = base64_encode($imageData);
+        echo '<p>Imagick avif: <img class="img-thumbnail" src="data:image/avif;base64,' . $imageDataBase64 . '"></p>';
+        echo '<p>Imagick webp: <img class="img-thumbnail" src="data:image/webp;base64,' . $imageDataBase64 . '"></p>';
+    } catch (Exception $e) {
+        echo rex_view::error($e->getMessage());
+    }
 }
 
 ?>
