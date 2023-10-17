@@ -1,6 +1,11 @@
 # Changelog
 
 
+## [4.0.1] - 17.10.2023
+- add error handling for imagick demo image generation in addon settings / #16 
+- add imagick version in addon settings
+
+
 ## [4.0.0] - 14.10.2023
 
 - add option to disable avif generation (some servers d not have avif codecs installed) / #15
