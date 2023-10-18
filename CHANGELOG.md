@@ -1,6 +1,10 @@
 # Changelog
 
 
+## [4.0.2] - 18.10.2023
+- fix version in package.yml
+
+
 ## [4.0.1] - 17.10.2023
 - add error handling for imagick demo image generation in addon settings / #16 
 - add imagick version in addon settings
