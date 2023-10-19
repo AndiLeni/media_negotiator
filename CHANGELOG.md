@@ -1,5 +1,8 @@
 # Changelog
 
+## [4.0.3] - 19.10.2023
+- fix version in package.yml
+
 
 ## [4.0.2] - 18.10.2023
 - fix version in package.yml
