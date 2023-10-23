@@ -79,6 +79,8 @@ echo "<p>AVIF Ausgabe möglich: {$canGenerateAvif}</p>";
 
 
 // demo images to see if codecs are installed and output is possible
+echo "<h3>Demo Bilder um Konvertierung zu überprüfen:</h3>";
+
 $demo_img = rex_path::addon('media_negotiator', "data/demo.jpg");
 $image = imagecreatefromjpeg($demo_img);
 
@@ -90,6 +92,8 @@ if (function_exists('imagewebp')) {
     imagedestroy($image);
     $imageData = base64_encode($imageData);
     echo '<p>imagewebp: <img class="img-thumbnail" src="data:image/webp;base64,' . $imageData . '"></p>';
+} else {
+    echo '<p>imagewebp: nicht verfügbar</p>';
 }
 
 if (function_exists('imageavif')) {
@@ -100,6 +104,8 @@ if (function_exists('imageavif')) {
     imagedestroy($image);
     $imageData = base64_encode($imageData);
     echo '<p>imageavif: <img class="img-thumbnail" src="data:image/avif;base64,' . $imageData . '"></p>';
+} else {
+    echo '<p>imageavif: nicht verfügbar</p>';
 }
 
 if (class_exists(Imagick::class)) {
@@ -110,7 +116,7 @@ if (class_exists(Imagick::class)) {
         $imageDataBase64 = base64_encode($imageData);
         echo '<p>Imagick webp: <img class="img-thumbnail" src="data:image/webp;base64,' . $imageDataBase64 . '"></p>';
     } catch (Exception $e) {
-        echo rex_view::error($e->getMessage());
+        echo "<p>Imagick webp: " . rex_view::error($e->getMessage()) . "</p>";
     }
 
     try {
@@ -119,10 +125,11 @@ if (class_exists(Imagick::class)) {
         $imageData = $image->getImageBlob();
         $imageDataBase64 = base64_encode($imageData);
         echo '<p>Imagick avif: <img class="img-thumbnail" src="data:image/avif;base64,' . $imageDataBase64 . '"></p>';
-        echo '<p>Imagick webp: <img class="img-thumbnail" src="data:image/webp;base64,' . $imageDataBase64 . '"></p>';
     } catch (Exception $e) {
-        echo rex_view::error($e->getMessage());
+        echo "<p>Imagick avif: " . rex_view::error($e->getMessage()) . "</p>";
     }
+} else {
+    echo '<p>Imagick: nicht verfügbar</p>';
 }
 
 ?>
