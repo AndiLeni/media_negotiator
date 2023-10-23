@@ -41,6 +41,20 @@ if ($func == "replaceMM") {
 </p>
 
 
+<?php
+
+$originalFilePath = rex_path::addon("media_manager", "lib/media_manager.php");
+$originalSource = file_get_contents($originalFilePath);
+$file_already_changed = str_contains($originalSource, "media_negotiator");
+
+if ($file_already_changed) {
+    echo rex_view::success("Methode ist bereits angepasst.");
+} else {
+    echo rex_view::success("Methode ist noch nicht angepasst.");
+}
+
+?>
+
 
 <h2 id="manuell">Manuell</h2>
 <p>
