@@ -1,5 +1,10 @@
 # Changelog
 
+## [4.0.4] - 23.10.2023
+- add hint if method is already changed for setup
+- ui improvements on config page
+
+
 ## [4.0.3] - 19.10.2023
 - fix version in package.yml
 
