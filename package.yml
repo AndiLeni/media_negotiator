@@ -6,12 +6,17 @@ supportpage: https://github.com/AndiLeni/media_negotiator
 
 page:
     title: 'Media Negotiator'
-    perm: media_negotiator[]
-    subpages:
-            setup:
-                { title: 'Setup', icon: rex-icon }    
-            config:
-                { title: 'Einstellungen', icon: rex-icon fa-cog }    
+    hidden: true
+
+pages:
+    media_manager/media_negotiator:
+        title: 'Media Negotiator'
+        perm: media_negotiator[]
+        subpages:
+                setup:
+                    { title: 'Setup', icon: rex-icon }    
+                config:
+                    { title: 'Einstellungen', icon: rex-icon fa-cog }    
     
 default_config:
     force_imagick: false
