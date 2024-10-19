@@ -1,6 +1,6 @@
 # Changelog
 
-## [x] - x
+## [4.1.0] - 19.10.2024
 - move addon backend page into the media manager addon as a subpage / #22 
 
 ## [4.0.4] - 23.10.2023
