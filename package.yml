@@ -4,10 +4,6 @@ name: Media Negotiator
 author: Andreas Lenhardt
 supportpage: https://github.com/AndiLeni/media_negotiator
 
-page:
-    title: 'Media Negotiator'
-    hidden: true
-
 pages:
     media_manager/media_negotiator:
         title: 'Media Negotiator'
