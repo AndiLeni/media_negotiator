@@ -72,7 +72,7 @@ $demo_img = rex_path::addon('media_negotiator', "data/demo.jpg");
 $image = imagecreatefromjpeg($demo_img);
 
 $image_jpeg = file_get_contents(rex_path::addon('media_negotiator', "data/demo.jpg"));
-$size_jpeg = number_format(strlen($image_jpeg) / 1000, 1);
+$size_jpeg = strlen($image_jpeg) / 1000;
 $base64_jpeg = '<img class="img-thumbnail" src="data:image/webp;base64,' . base64_encode($image_jpeg) . '">';
 
 
@@ -82,7 +82,7 @@ if (function_exists('imagewebp')) {
     $imageData = ob_get_contents();
     ob_end_clean();
     imagedestroy($image);
-    $size_imagewebp = number_format(strlen($imageData) / 1000, 1);
+    $size_imagewebp = strlen($imageData) / 1000;
     $img_imagewebp = '<img class="img-thumbnail" src="data:image/webp;base64,' . base64_encode($imageData) . '">';
 } else {
     $size_imagewebp = 0;
@@ -95,7 +95,7 @@ if (function_exists('imageavif')) {
     $imageData = ob_get_contents();
     ob_end_clean();
     imagedestroy($image);
-    $size_imageavif = number_format(strlen($imageData) / 1000, 1);
+    $size_imageavif = strlen($imageData) / 1000;
     $img_imageavif = '<img class="img-thumbnail" src="data:image/webp;base64,' . base64_encode($imageData) . '">';
 } else {
     $size_imageavif = 0;
@@ -144,32 +144,32 @@ if (class_exists(Imagick::class)) {
     <tr>
         <td>Originalbild</td>
         <td><?= $base64_jpeg ?></td>
-        <td><b><?= $size_jpeg ?></b> KB</td>
+        <td><b><?= number_format($size_jpeg, 1) ?></b> KB</td>
         <td>-</td>
     </tr>
     <tr>
         <td>imageavif</td>
         <td><?= $img_imageavif ?></td>
-        <td><b><?= $size_imageavif ?></b> KB</td>
+        <td><b><?= number_format($size_imageavif, 1) ?></b> KB</td>
         <td><b><?= number_format($size_imageavif / $size_jpeg * 100, 1) ?>%</b></td>
     </tr>
     <tr>
         <td>imagewebp</td>
         <td><?= $img_imagewebp ?></td>
-        <td><b><?= $size_imagewebp ?></b> KB</td>
+        <td><b><?= number_format($size_imagewebp, 1) ?></b> KB</td>
         <td><b><?= number_format($size_imagewebp / $size_jpeg * 100, 1) ?>%</b></td>
     </tr>
 
     <tr>
         <td>Imagick avif</td>
         <td><?= $img_imagickavif ?></td>
-        <td><b><?= $size_imagickavif ?></b> KB</td>
+        <td><b><?= number_format($size_imagickavif, 1) ?></b> KB</td>
         <td><b><?= number_format($size_imagickavif / $size_jpeg * 100, 1) ?>%</b></td>
     </tr>
     <tr>
         <td>Imagick webp</td>
         <td><?= $img_imagickwebp ?></td>
-        <td><b><?= $size_imagickwebp ?></b> KB</td>
+        <td><b><?= number_format($size_imagickwebp, 1) ?></b> KB</td>
         <td><b><?= number_format($size_imagickwebp / $size_jpeg * 100, 1) ?>%</b></td>
     </tr>
 </table>
