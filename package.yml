@@ -1,5 +1,5 @@
 package: media_negotiator
-version: 4.1.0
+version: 5.0.0
 name: Media Negotiator
 author: Andreas Lenhardt
 supportpage: https://github.com/AndiLeni/media_negotiator
@@ -19,8 +19,8 @@ default_config:
     disable_avif: false
 
 requires:
-    redaxo: ^5.13.0
+    redaxo: ^5.18.0
     php:
-        version: "^8.0"
+        version: "^8.1"
     packages:
-        media_manager: '^2.11.0'
+        media_manager: '^2.17.0'

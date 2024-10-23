@@ -1,5 +1,9 @@
 # Changelog
 
+## [5.0.0] - 23.10.2024
+- use new extensionpoint MEDIA_MANAGER_INIT in Redaxo >= 5.18 instead of patching media_manager.php / #18
+- new addon page for settings
+
 ## [4.1.0] - 19.10.2024
 - move addon backend page into the media manager addon as a subpage / #22 
 
