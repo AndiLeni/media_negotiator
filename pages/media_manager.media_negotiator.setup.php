@@ -85,7 +85,7 @@ if (function_exists('imagewebp')) {
     $size_imagewebp = number_format(strlen($imageData) / 1000, 1);
     $img_imagewebp = '<img class="img-thumbnail" src="data:image/webp;base64,' . base64_encode($imageData) . '">';
 } else {
-    $size_imagewebp = "<p>-</p>";
+    $size_imagewebp = 0;
     $img_imagewebp = '<p>imagewebp: nicht verfügbar</p>';
 }
 
@@ -98,7 +98,7 @@ if (function_exists('imageavif')) {
     $size_imageavif = number_format(strlen($imageData) / 1000, 1);
     $img_imageavif = '<img class="img-thumbnail" src="data:image/webp;base64,' . base64_encode($imageData) . '">';
 } else {
-    $size_imageavif = "<p>-</p>";
+    $size_imageavif = 0;
     $img_imageavif = '<p>imagewebp: nicht verfügbar</p>';
 }
 
@@ -110,7 +110,7 @@ if (class_exists(Imagick::class)) {
         $size_imagickwebp = $image->getImageLength() / 1000;
         $img_imagickwebp = '<img class="img-thumbnail" src="data:image/webp;base64,' . base64_encode($imageData) . '">';
     } catch (Exception $e) {
-        $size_imagickwebp = "<p>-</p>";
+        $size_imagickwebp = 0;
         $img_imagickwebp = "<p>Imagick webp: " . rex_view::error($e->getMessage()) . "</p>";
     }
 
@@ -122,13 +122,13 @@ if (class_exists(Imagick::class)) {
         $size_imagickavif = $image->getImageLength() / 1000;
         $img_imagickavif = '<img class="img-thumbnail" src="data:image/webp;base64,' . base64_encode($imageData) . '">';
     } catch (Exception $e) {
-        $size_imagickavif = "<p>-</p>";
+        $size_imagickavif = 0;
         $img_imagickavif = "<p>Imagick webp: " . rex_view::error($e->getMessage()) . "</p>";
     }
 } else {
-    $size_imagickwebp = "<p>-</p>";
+    $size_imagickwebp = 0;
     $img_imagickwebp = "<p>Imagick webp: nicht verfügbar</p>";
-    $size_imagickavif = "<p>-</p>";
+    $size_imagickavif = 0;
     $img_imagickavif = "<p>Imagick avif: nicht verfügbar</p>";
 }
 
