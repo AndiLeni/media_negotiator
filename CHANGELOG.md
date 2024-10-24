@@ -1,5 +1,8 @@
 # Changelog
 
+## [5.0.2] - 24.10.2024
+- #23 / fix error on addon page when Imagick is not available 
+
 ## [5.0.1] - 23.10.2024
 - fix addon page
 
