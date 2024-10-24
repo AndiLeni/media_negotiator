@@ -28,6 +28,7 @@ if (class_exists(Imagick::class)) {
     echo "<p>Imagick Version: " . $imagickVersion . "</p>";
 } else {
     echo '<p class="text-danger bold"><b>Imagick ist nicht installiert</b></p>';
+    $imagickFormats = [];
 }
 
 if (function_exists('imageavif')) {
