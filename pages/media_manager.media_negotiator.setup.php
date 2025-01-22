@@ -1,3 +1,10 @@
+<?php
+
+use media_negotiator\Helper;
+
+?>
+
+
 <h2>Anleitung:</h2>
 <p>Dem Medientypen den Effekt "Negotiate image format" hinzufügen.
     Danach wird automatisch eines der folgenden Formate ausgeliefert: avif, webp, jpg (in dieser Reihenfolge).
@@ -6,6 +13,7 @@
 <h2>Verfügbare Funktionen:</h2>
 
 <?php
+
 
 if (class_exists(Imagick::class)) {
     echo '<p class="text-success bold"><b>Imagick ist installiert</b></p>';
@@ -43,19 +51,37 @@ if (function_exists('imagewebp')) {
     echo '<p class="text-danger bold"><b>imagewebp ist nicht verfügbar</b></p>';
 }
 
+// Check if GD can handle webp and avif. 
+// The PHP version must support avif even if Imagick is used. 
+// Otherwise calling imagecreatefromstring() with an avif image from Imagick will throw an error.
+if (Helper::gdSupportsWebp()) {
+    echo '<p class="text-success bold"><b>GD kann WEBP</b></p>';
+} else {
+    echo '<p class="text-danger bold"><b>GD kann kein WEBP</b></p>';
+}
+
+if (Helper::gdSupportsAvif()) {
+    echo '<p class="text-success bold"><b>GD kann AVIF</b></p>';
+} else {
+    echo '<p class="text-danger bold"><b>GD kann kein AVIF</b></p>';
+}
+
 if (rex_version::compare(rex::getVersion(), '5.15.0', '>=')) {
     echo '<p class="text-success bold"><b>Redaxo Version neuer als 5.15.0</b></p>';
 } else {
     echo '<p class="text-danger bold"><b>Redaxo Version nicht neuer als 5.15.0</b></p>';
 }
 
-if (in_array("WEBP", $imagickFormats) || function_exists('imagewebp')) {
+$webpPossible = Helper::webpPossible();
+$avifPossible = Helper::avifPossible();
+
+if ($webpPossible) {
     $canGenerateWebp = '<span class="text-success"><b>Ja</b></span>';
 } else {
     $canGenerateWebp = '<span class="text-danger"><b>Nein</b></span>';
 }
 
-if (in_array("AVIF", $imagickFormats) || function_exists('imageavif')) {
+if ($avifPossible) {
     $canGenerateAvif = '<span class="text-success"><b>Ja</b></span>';
 } else {
     $canGenerateAvif = '<span class="text-danger"><b>Nein</b></span>';
@@ -68,6 +94,8 @@ echo "<p>AVIF Ausgabe möglich: " . $canGenerateAvif . "</p>";
 
 // demo images to see if codecs are installed and output is possible
 echo "<h3>Demo Bilder um Konvertierung zu überprüfen:</h3>";
+
+echo rex_view::info("Auch wenn hier ein AVIF- oder WebP-Bild angezeigt wird, kann es sein, dass die Ausgabe in diesen Formaten nicht funktioniert, wenn oben “Nein” steht. Das liegt daran, dass diese Bilder hier nicht über den Media Manager bereitgestellt werden und deshalb nicht den gleichen Einschränkungen unterliegen.");
 
 $demo_img = rex_path::addon('media_negotiator', "data/demo.jpg");
 $image = imagecreatefromjpeg($demo_img);
@@ -100,7 +128,7 @@ if (function_exists('imageavif')) {
     $img_imageavif = '<img class="img-thumbnail" src="data:image/webp;base64,' . base64_encode($imageData) . '">';
 } else {
     $size_imageavif = 0;
-    $img_imageavif = '<p>imagewebp: nicht verfügbar</p>';
+    $img_imageavif = '<p>imageavif: nicht verfügbar</p>';
 }
 
 if (class_exists(Imagick::class)) {
@@ -124,7 +152,7 @@ if (class_exists(Imagick::class)) {
         $img_imagickavif = '<img class="img-thumbnail" src="data:image/webp;base64,' . base64_encode($imageData) . '">';
     } catch (Exception $e) {
         $size_imagickavif = 0;
-        $img_imagickavif = "<p>Imagick webp: " . rex_view::error($e->getMessage()) . "</p>";
+        $img_imagickavif = "<p>Imagick avif: " . rex_view::error($e->getMessage()) . "</p>";
     }
 } else {
     $size_imagickwebp = 0;

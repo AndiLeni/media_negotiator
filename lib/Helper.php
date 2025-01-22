@@ -11,39 +11,64 @@ class Helper
 {
 
 
-    public static function getOutputFormat($requestedTypes): string
+    public static function getOutputFormat(array $requestedTypes): string
     {
-        $possibleFormat = "default";
-
-        $imagickFormats = [];
-
-        if (class_exists(Imagick::class)) {
-            $imagick = new Imagick();
-            $imagickFormats = $imagick->queryFormats();
+        if (in_array('image/avif', $requestedTypes) && self::avifPossible() && !self::avifDisabled()) {
+            return 'avif';
         }
-
-        // first check webp and set it, can be overridden by avif in next step if avif is available
-        if (in_array('image/webp', $requestedTypes)) {
-            // check if webp output is possible
-
-            if ((function_exists('imagewebp') || in_array("WEBP", $imagickFormats))) {
-                $possibleFormat = "webp";
-            }
+        if (in_array('image/webp', $requestedTypes) && self::webpPossible()) {
+            return 'webp';
         }
+        return 'default';
+    }
 
-        // check if avif output is possible and not deactivated
-        $disable_avif = rex_config::get("media_negotiator", "disable_avif", false);
-        if (in_array('image/avif', $requestedTypes) && !$disable_avif) {
+    private static function avifDisabled(): bool
+    {
+        return rex_config::get('media_negotiator', 'disable_avif', false);
+    }
 
-            // check if redaxo version >= 5.15.0 (media_manager supports avif from this version upwards, must be true for MM and Imagick)
-            // and if either imageavif() is available or Imagick installed
-            if (rex_version::compare(rex::getVersion(), '5.15.0', '>=') && (function_exists('imageavif') || in_array("AVIF", $imagickFormats))) {
-                $possibleFormat = "avif";
-            }
+    private static function getImagickFormats(): array
+    {
+        if (!class_exists(\Imagick::class)) {
+            return [];
         }
+        $imagick = new \Imagick();
+        return $imagick->queryFormats();
+    }
 
-        // if neither of those methods is available do not convert at all
-        return $possibleFormat;
+    public static function webpPossible(): bool
+    {
+        $imagickFormats = self::getImagickFormats();
+        return (function_exists('imagewebp') || in_array('WEBP', $imagickFormats))
+            && self::gdSupportsWebp();
+    }
+
+    public static function avifPossible(): bool
+    {
+        $imagickFormats = self::getImagickFormats();
+        return \rex_version::compare(\rex::getVersion(), '5.15.0', '>=')
+            && (function_exists('imageavif') || in_array('AVIF', $imagickFormats))
+            && self::gdSupportsAvif();
+    }
+
+    public static function gdSupportsWebp(): bool
+    {
+        if (function_exists('gd_info')) {
+            $gdInfo = gd_info();
+            return isset($gdInfo['WebP Support']) && $gdInfo['WebP Support'];
+        } else {
+            return false;
+        }
+    }
+
+    public static function gdSupportsAvif(): bool
+    {
+        if (function_exists('gd_info')) {
+            $gdInfo = gd_info();
+            return isset($gdInfo['AVIF Support']) && $gdInfo['AVIF Support'];
+        } else {
+            return false;
+        }
     }
 
     public static function imagickConvert($gdImage, $targetFormat)

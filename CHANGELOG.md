@@ -1,5 +1,9 @@
 # Changelog
 
+## [5.0.3] - 22.01.2025
+- #29 / fix error messages
+- Check if PHP and GD is compiled with avif support
+
 ## [5.0.2] - 24.10.2024
 - #23 / fix error on addon page when Imagick is not available 
 
